@@ -16,7 +16,6 @@ def create_deck():
 
 
 card_deck = create_deck()
-print(card_deck)
 
 
 class Player:
@@ -49,7 +48,23 @@ class Player:
 
         return self.score
 
+    def hit(self, card):
+        self.hand.append(card)
+        self.score = self.set_score()
+
+    def play(self, new_hand):
+        self.hand = new_hand
+        self.score = self.set_score()
+
+    def pay(self, amount):
+        self.money -= amount
+
+    def win(self, amount):
+        self.money += amount
+
 
 Player1 = Player(["2", "3", "J"])
+
+Player1.play(["A", "A", "10"])
 
 print(Player1)
