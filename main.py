@@ -15,9 +15,6 @@ def create_deck():
     return deck
 
 
-card_deck = create_deck()
-
-
 class Player:
     def __init__(self, hand=[], money=100):
         self.hand = hand
@@ -73,14 +70,34 @@ class Player:
             self.bet = 0
 
 
-Player1 = Player(["2", "3", "J"])
+def print_house(House):
+    for card in range(len(House.hand)):
+        if card == 0:
+            print('House: *', end=" ")
+        elif card == len(House.hand) - 1:
+            print(f'House: {House.hand[card]}')
+        else:
+            print(f'House: {House.hand[card]}', end=" ")
 
-Player1.play(["A", "K"])
 
-Player1.bet_money(30)
+card_deck = create_deck()
+first_hand = [card_deck.pop(), card_deck.pop()]
+second_hand = [card_deck.pop(), card_deck.pop()]
 
-print(Player1.money, Player1.bet)
+player_1 = Player(first_hand)
+house = Player(second_hand)
 
-Player1.win(True)
+print_house(house)
+print(player_1)
 
-print(Player1.money, Player1.bet)
+while(player_1.score < 21):
+    action = input("Do you want another card? (y/n): ")
+
+    if action == 'y':
+        player_1.hit(card_deck.pop())
+        print(player_1)
+        print_house(house)
+    else:
+        break
+
+print(house)
